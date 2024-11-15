@@ -16,14 +16,14 @@ public class Client(string FIO, Gender gender, DateTime birthDate, List<JobType>
 
     public string GetCreditHistory()
     {
-        string result = $"Кредитная история для {_FIO}:\n";
+        string result = $"РљСЂРµРґРёС‚РЅР°СЏ РёСЃС‚РѕСЂРёСЏ РґР»СЏ {_FIO}:\n";
         var credits = Bank.GetAllCreditsFor(this);
 
-        if (credits.Count == 0) return result + "Ничего не найдено.";
+        if (credits.Count == 0) return result + "РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ.";
         
         foreach(var credit in credits)
         {
-            result += $"\tкредит в банке {credit.Bank.Name} под {credit.Rate}% годовых на сумму {credit.Amount} рублей до {credit.RepaymentDate:dd.MM.yyyy}\n";
+            result += $"\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ {credit.Bank.Name} РїРѕРґ {credit.Rate}% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ {credit.Amount} СЂСѓР±Р»РµР№ РґРѕ {credit.RepaymentDate:dd.MM.yyyy}\n";
 
         }
 

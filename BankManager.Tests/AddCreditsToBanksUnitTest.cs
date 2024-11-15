@@ -5,45 +5,45 @@ public class AddCreditsToDifferentBanksUnitTest
     [Fact]
     public void OneCreditInOneBankTest()
     {
-        var client = new Client("Васильев Василий Васильевич", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "Нижний Новгород");
-        var sbank = new Bank("СБанк");
+        var client = new Client("Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "РќРёР¶РЅРёР№ РќРѕРІРіРѕСЂРѕРґ");
+        var sbank = new Bank("РЎР‘Р°РЅРє");
         sbank.IssueCreditTo(client, 1, 100000);
-        Assert.Equal("Кредитная история для Васильев Василий Васильевич:\n\tкредит в банке СБанк под 17% годовых на сумму 100000 рублей до 15.11.2025\n", client.GetCreditHistory());
+        Assert.Equal("РљСЂРµРґРёС‚РЅР°СЏ РёСЃС‚РѕСЂРёСЏ РґР»СЏ Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡:\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЎР‘Р°РЅРє РїРѕРґ 19% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 100000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n", client.GetCreditHistory());
 
     }
 
     [Fact]
     public void TwoCreditsInTwoBanksTest()
     {
-        var client = new Client("Васильев Василий Васильевич", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "Нижний Новгород");
-        var sbank = new Bank("СБанк");
-        var ibank = new Bank("ЯБанк");
+        var client = new Client("Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "РќРёР¶РЅРёР№ РќРѕРІРіРѕСЂРѕРґ");
+        var sbank = new Bank("РЎР‘Р°РЅРє");
+        var ibank = new Bank("РЇР‘Р°РЅРє");
         sbank.IssueCreditTo(client, 1, 100000);
         ibank.IssueCreditTo(client, 1, 10000);
-        Assert.Equal("Кредитная история для Васильев Василий Васильевич:\n\tкредит в банке СБанк под 17% годовых на сумму 100000 рублей до 15.11.2025\n\tкредит в банке ЯБанк под 19% годовых на сумму 10000 рублей до 15.11.2025\n", client.GetCreditHistory());
+        Assert.Equal("РљСЂРµРґРёС‚РЅР°СЏ РёСЃС‚РѕСЂРёСЏ РґР»СЏ Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡:\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЎР‘Р°РЅРє РїРѕРґ 19% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 100000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЇР‘Р°РЅРє РїРѕРґ 21% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 10000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n", client.GetCreditHistory());
 
     }
 
     [Fact]
     public void TwoCreditsInOneBankTest()
     {
-        var client = new Client("Васильев Василий Васильевич", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "Нижний Новгород");
-        var sbank = new Bank("СБанк");
+        var client = new Client("Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "РќРёР¶РЅРёР№ РќРѕРІРіРѕСЂРѕРґ");
+        var sbank = new Bank("РЎР‘Р°РЅРє");
         sbank.IssueCreditTo(client, 1, 100000);
         sbank.IssueCreditTo(client, 1, 10000);
-        Assert.Equal("Кредитная история для Васильев Василий Васильевич:\n\tкредит в банке СБанк под 17% годовых на сумму 100000 рублей до 15.11.2025\n\tкредит в банке СБанк под 18% годовых на сумму 10000 рублей до 15.11.2025\n", client.GetCreditHistory());
+        Assert.Equal("РљСЂРµРґРёС‚РЅР°СЏ РёСЃС‚РѕСЂРёСЏ РґР»СЏ Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡:\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЎР‘Р°РЅРє РїРѕРґ 19% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 100000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЎР‘Р°РЅРє РїРѕРґ 20% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 10000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n", client.GetCreditHistory());
 
     }
 
     [Fact]
     public void CreditToBadHistoryClient()
     {
-        var client = new Client("Васильев Василий Васильевич", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "Нижний Новгород");
-        var sbank = new Bank("СБанк");
-        var ibank = new Bank("ЯБанк");
+        var client = new Client("Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡", Gender.Man, new DateTime(2004, 12, 24), [JobType.Student], "РќРёР¶РЅРёР№ РќРѕРІРіРѕСЂРѕРґ");
+        var sbank = new Bank("РЎР‘Р°РЅРє");
+        var ibank = new Bank("РЇР‘Р°РЅРє");
         ibank.AddFamousCredit(new Credit(ibank, 17, 100000, new DateTime(2023, 11, 14)), client);
         sbank.IssueCreditTo(client, 1, 10000);
-        Assert.Equal("Кредитная история для Васильев Василий Васильевич:\n\tкредит в банке ЯБанк под 17% годовых на сумму 100000 рублей до 14.11.2023\n\tкредит в банке СБанк под 20% годовых на сумму 10000 рублей до 15.11.2025\n", client.GetCreditHistory());
+        Assert.Equal("РљСЂРµРґРёС‚РЅР°СЏ РёСЃС‚РѕСЂРёСЏ РґР»СЏ Р’Р°СЃРёР»СЊРµРІ Р’Р°СЃРёР»РёР№ Р’Р°СЃРёР»СЊРµРІРёС‡:\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЇР‘Р°РЅРє РїРѕРґ 17% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 100000 СЂСѓР±Р»РµР№ РґРѕ 14.11.2023\n\tРєСЂРµРґРёС‚ РІ Р±Р°РЅРєРµ РЎР‘Р°РЅРє РїРѕРґ 22% РіРѕРґРѕРІС‹С… РЅР° СЃСѓРјРјСѓ 10000 СЂСѓР±Р»РµР№ РґРѕ 15.11.2025\n", client.GetCreditHistory());
 
     }
 
