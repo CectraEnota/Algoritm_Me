@@ -44,9 +44,8 @@ public class Bank(string name)
         }
 
         //В зависимости от срока, на который даём кредит, меняем ставку
-        if (deadline.Year <= 1) rate++;
-        if (deadline.Year <= 5) rate++;
-        if (deadline.Year >= 10) rate--;
+        if (countYears <= 1) rate++;
+        if (countYears >= 10) rate--;
 
         //В зависимости от суммы займа меням ставку
         if (amount <= 10000) rate++;
@@ -54,14 +53,14 @@ public class Bank(string name)
         if (amount >= 1000000) rate--;
 
         //Проверяем данные клиента для подбора условий кредита
-        if (client.City != "Москва" && client.City != "Санкт-Петербург") rate--;
+        if (client.City != "Москва" && client.City != "Санкт-Петербург") rate-=2;
         if (client.JobsType.Contains(JobType.Student)) rate--;
-        if (client.JobsType.Contains(JobType.Programmer)) rate--;
+        if (client.JobsType.Contains(JobType.Programmer)) rate-=2;
 
         //Проверка, является ли клиент пенсионером
         if (client.Gender == Gender.Man)
         {
-            if (clientYears < 65) rate--;
+            if (clientYears > 65) rate--;
             else if (clientYears == 65)
             {
                 if (client.BirthDate.Month < nowTime.Month) rate--;
@@ -76,13 +75,13 @@ public class Bank(string name)
         }
         else
         {
-            if (clientYears < 60) rate--;
+            if (clientYears > 60) rate--;
             else if (clientYears == 60)
             {
                 if (client.BirthDate.Month < nowTime.Month) rate--;
                 else if (client.BirthDate.Month == nowTime.Month)
                 {
-                    if (client.BirthDate.Day < nowTime.Day) rate--;
+                    if (client.BirthDate.Day <= nowTime.Day) rate--;
 
                 }
 
