@@ -25,7 +25,7 @@ public class Bank(string name)
         var nowTime = DateTime.Now;
         var deadline = nowTime.AddYears(countYears);
         var rate = KeyRate;
-        List<Credit> clientCredits = [];
+        var clientCreditRating = 0d;
         bool isFailDeadline = false;
         bool isThisBankClient = false;
 
@@ -52,12 +52,12 @@ public class Bank(string name)
         if (amount <= 100000) rate++;
         if (amount >= 1000000) rate--;
 
-        //Проверяем данные клиента для подбора условий кредита
+        //Проверяем данные клиента, чтобы подобрать лучшие условия
         if (client.City != "Москва" && client.City != "Санкт-Петербург") rate-=2;
         if (client.JobsType.Contains(JobType.Student)) rate--;
         if (client.JobsType.Contains(JobType.Programmer)) rate-=2;
 
-        //Проверка, является ли клиент пенсионером
+        //Проверяем, является ли клиент пенсионером
         if (client.Gender == Gender.Man)
         {
             if (clientYears > 65) rate--;
@@ -89,10 +89,10 @@ public class Bank(string name)
 
         }
 
-        //Проверяем кредитную историю клиента
+        //Проверяем кредитную историю клиента, чтобы сформировать рейтинг
 
-        //Если кредитов нет, понижаем ставку
-        if (!_credits.ContainsValue(client)) rate--;
+        //Если кредитов нет, улучшаем рейтинг
+        if (!_credits.ContainsValue(client)) clientCreditRating++;
         
         //Находим кредиты клиента
         foreach (var creditPair in _credits)
@@ -109,10 +109,10 @@ public class Bank(string name)
 
         }
 
-        if (isFailDeadline) rate++;
-        if (isThisBankClient) rate--;
+        if (isFailDeadline) clientCreditRating--;
+        if (isThisBankClient) clientCreditRating++;
 
-        Credit newCredit = new Credit(this, rate, amount, deadline);
+        Credit newCredit = new Credit(this, rate - clientCreditRating, amount, deadline);
         _credits.Add(newCredit, client);
 
     }
